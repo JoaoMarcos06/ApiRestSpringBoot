@@ -1,0 +1,487 @@
+_id: spc_2cb7f40254d6496cba124f1359a93807
+type: ApiSpec
+parentId: wrk_79f303a9f72e48ca8cd340faf05c38b9
+modified: 1623782857759
+created: 1623780548364
+fileName: API REST SpringBoot 1.0.0
+contents: |
+  ---
+  swagger: "2.0"
+  info:
+    version: 1.0.0
+    title: API REST SpringBoot
+    contact:
+      email: joao.marcos06@hotmail.com
+  host: localhost:8080
+  basePath: /
+  tags:
+  - name: produtos
+    description: Endpoints para os produtos
+  - name: serviços
+    description: Endpoints para os serviços
+  - name: pedidos
+    description: Endpoints para os pedido
+  - name: detalhes
+    description: Endpoints para os detalhes do pedido
+  schemes:
+  - http
+  paths:
+    /products:
+      get:
+        tags:
+        - produtos
+        summary: Retorna todos os produtos cadastrados
+        operationId: listProducts
+        consumes:
+        - application/json
+        produces:
+        - application/json
+        parameters: []
+        responses:
+          "200":
+            description: Lista de produtos
+      post:
+        tags:
+        - produtos
+        summary: Cadastra um novo produto
+        operationId: addProduct
+        consumes:
+        - application/json
+        produces:
+        - application/json
+        parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              description:
+                type: string
+                example: 'Produto novo'
+              value:
+                type: number
+                example: 50.5
+        responses:
+          "200":
+            description: Produto cadastrado.
+    /products/{id}:
+      get:
+        tags:
+        - produtos
+        summary: Encontra um produto pelo ID
+        operationId: productGetById
+        produces:
+        - application/json
+        parameters:
+        - name: ID
+          in: path
+          description: ID do produto que deseja acessar
+          required: true
+          type: string
+        responses:
+          "200":
+            description: Produto selecionado
+          "404":
+            description: Produto não encontrado
+      put:
+        tags:
+        - produtos
+        summary: Atualiza um produto pelo ID
+        operationId: productUpdate
+        produces:
+        - application/json
+        parameters:
+        - name: ID
+          in: path
+          description: ID do produto que deseja acessar
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              description:
+                type: string
+                example: 'Produto novo'
+              value:
+                type: number
+                example: 50.5
+              active:
+                type: boolean
+                example: false
+        responses:
+          "200":
+            description: Produto atualizado
+          "404":
+            description: Produto não encontrado
+      delete:
+        tags:
+        - produtos
+        summary: Deleta um produto pelo ID
+        operationId: productDeleteById
+        produces:
+        - application/json
+        parameters:
+        - name: ID
+          in: path
+          description: ID do produto que deseja acessar
+          required: true
+          type: string
+        responses:
+          "200":
+            description: Produto apagado
+          "404":
+            description: Produto não encontrado
+    /services:
+      get:
+        tags:
+        - serviços
+        summary: Retorna todos os produtos cadastrados
+        operationId: listServices
+        consumes:
+        - application/json
+        produces:
+        - application/json
+        parameters: []
+        responses:
+          "200":
+            description: Lista de serviço
+      post:
+        tags:
+        - serviços
+        summary: Cadastra um novo serviço
+        operationId: addService
+        consumes:
+        - application/json
+        produces:
+        - application/json
+        parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              description:
+                type: string
+                example: 'Serviço novo'
+              value:
+                type: number
+                example: 50.5
+        responses:
+          "200":
+            description: Serviço cadastrado.
+    /services/{id}:
+      get:
+        tags:
+        - serviços
+        summary: Encontra um serviço pelo ID
+        operationId: serviceGetById
+        produces:
+        - application/json
+        parameters:
+        - name: ID
+          in: query
+          description: ID do serviço que deseja acessar
+          required: true
+          type: string
+        responses:
+          "200":
+            description: Serviço selecionado
+          "404":
+            description: Serviço não encontrado
+      put:
+        tags:
+        - serviços
+        summary: Atualiza um serviço pelo ID
+        operationId: serviceUpdate
+        produces:
+        - application/json
+        parameters:
+        - name: ID
+          in: query
+          description: ID do serviço que deseja acessar
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              description:
+                type: string
+                example: 'Serviço alteado'
+              value:
+                type: number
+                example: 60
+              active:
+                type: boolean
+                example: false
+        responses:
+          "200":
+            description: Serviço atualizado
+          "404":
+            description: Serviço não encontrado
+      delete:
+        tags:
+        - serviços
+        summary: Deleta um serviço pelo ID
+        operationId: serviceDeleteById
+        produces:
+        - application/json
+        parameters:
+        - name: ID
+          in: query
+          description: ID do serviço que deseja acessar
+          required: true
+          type: string
+        responses:
+          "200":
+            description: Serviço apagado
+          "404":
+            description: Serviço não encontrado
+    /orders:
+      get:
+        tags:
+        - pedidos
+        summary: Retorna todos os pedidos cadastrados
+        operationId: listOrdes
+        consumes:
+        - application/json
+        produces:
+        - application/json
+        parameters: []
+        responses:
+          "200":
+            description: Lista de pedidos
+      post:
+        tags:
+        - pedidos
+        summary: Cadastra um novo pedido
+        operationId: addOrder
+        consumes:
+        - application/json
+        produces:
+        - application/json
+        parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              description:
+                type: string
+                example: 'Pedido com desconto'
+        responses:
+          "200":
+            description: Pedido cadastrado.
+    /orders/{id}:
+      get:
+        tags:
+        - pedidos
+        summary: Encontra um pedido pelo ID
+        operationId: orderGetById
+        produces:
+        - application/json
+        parameters:
+        - name: ID
+          in: query
+          description: ID do pedido que deseja acessar
+          required: true
+          type: string
+        responses:
+          "200":
+            description: Pedido selecionado
+          "404":
+            description: Pedido não encontrado
+      put:
+        tags:
+        - pedidos
+        summary: Atualiza um pedido pelo ID
+        operationId: orderUpdate
+        produces:
+        - application/json
+        parameters:
+        - name: ID
+          in: query
+          description: ID do pedido que deseja acessar
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              description:
+                type: string
+                example: 'Pedido com desconto'
+              status:
+                type: string
+                example: "CLOSE"
+        responses:
+          "200":
+            description: Pedido atualizado
+          "404":
+            description: Pedido não encontrado
+      delete:
+        tags:
+        - pedidos
+        summary: Deleta um pedido pelo ID
+        operationId: pedidoDeleteById
+        produces:
+        - application/json
+        parameters:
+        - name: ID
+          in: query
+          description: ID do pedido que deseja acessar
+          required: true
+          type: string
+        responses:
+          "200":
+            description: Pedido apagado
+          "404":
+            description: Pedido não encontrado
+    /order/{id}:
+      get:
+        tags:
+        - detalhes
+        summary: Encontra um pedido pelo ID
+        operationId: orderDetailGetById
+        produces:
+        - application/json
+        parameters:
+        - name: ID
+          in: query
+          description: ID do pedido que deseja acessar
+          required: true
+          type: string
+        responses:
+          "200":
+            description: Pedido selecionado
+          "404":
+            description: Pedido não encontrado
+      post:
+        tags:
+        - detalhes
+        summary: Adiciona produtos ao pedido
+        operationId: addProductsOrderGetById
+        produces:
+        - application/json
+        parameters:
+        - name: ID
+          in: query
+          description: ID do pedido que deseja acessar
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+                example: 'ac16b001-7a10-1bd3-817a-105ce32d0001'
+              description:
+                type: string
+                example: 'Produto 2'
+              value:
+                type: number
+                example: 50.0
+        responses:
+          "200":
+            description: Pedido selecionado
+          "404":
+            description: Pedido não encontrado
+      put:
+        tags:
+        - detalhes
+        summary: Atualiza o desconto
+        operationId: orderDetailUpdate
+        produces:
+        - application/json
+        parameters:
+        - name: ID
+          in: query
+          description: ID do pedido que deseja acessar
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              discount:
+                type: number
+                example: 50.0
+        responses:
+          "200":
+            description: Pedido atualizado
+          "404":
+            description: Pedido não encontrado
+  definitions:
+    Item:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        description:
+          type: string
+        active:
+          type: boolean
+        type:
+          type: string
+          enum:
+          - PRODUCT
+          - SERVICE
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+      xml:
+        name: Order
+    Orders:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        description:
+          type: string
+        discount:
+          type: number
+        status:
+          type: string
+          enum:
+          - OPEN
+          - CLOSE
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+      xml:
+        name: Order
+    Order_Item:
+      type: object
+      properties:
+        order_id:
+          type: integer
+          format: int64
+        item_id:
+          type: integer
+          format: int64
+      xml:
+        name: Order_item
+contentType: yaml
